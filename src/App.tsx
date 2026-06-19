@@ -446,14 +446,14 @@ export default function App() {
 
           {/* Desktop Nav Selection Links */}
           <div className="hidden lg:flex items-center gap-6">
-            <button onClick={() => setActivePage("landing")} className={`text-xs font-bold cursor-pointer transition-colors ${activePage === "landing" ? "text-sky-600" : "text-slate-500 hover:text-slate-900"}`}>Home</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("dashboard"); }} className={`text-xs font-bold cursor-pointer transition-colors ${activePage === "dashboard" ? "text-sky-600" : "text-slate-500 hover:text-slate-900"}`}>Citizen Hub</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("report_issue"); }} className={`text-xs font-bold cursor-pointer transition-colors ${activePage === "report_issue" ? "text-sky-600" : "text-slate-500 hover:text-slate-900"}`}>Report Issue</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("live_map"); }} className={`text-xs font-bold cursor-pointer transition-colors ${activePage === "live_map" ? "text-sky-600" : "text-slate-500 hover:text-slate-900"}`}>Live Map</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("city_health"); }} className={`text-xs font-bold cursor-pointer transition-colors ${activePage === "city_health" ? "text-sky-600" : "text-slate-500 hover:text-slate-900"}`}>Outages & Statistics</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("ai_assistant"); }} className={`text-xs font-bold cursor-pointer transition-colors ${activePage === "ai_assistant" ? "text-sky-600" : "text-slate-500 hover:text-slate-900"}`}>AI Assistant</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("my_reports"); }} className={`text-xs font-bold cursor-pointer transition-colors ${activePage === "my_reports" ? "text-sky-600" : "text-slate-500 hover:text-slate-900"}`}>My Complaints</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("profile"); }} className={`text-xs font-bold cursor-pointer transition-colors ${activePage === "profile" ? "text-sky-600" : "text-slate-500 hover:text-slate-900"}`}>Profile</button>
+            <button onClick={() => setActivePage("landing")} className={`premium-nav-item text-xs font-bold cursor-pointer transition-colors nav-blue ${activePage === "landing" ? "active" : ""}`}>Home</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("dashboard"); }} className={`premium-nav-item text-xs font-bold cursor-pointer transition-colors nav-green ${activePage === "dashboard" ? "active" : ""}`}>Citizen Hub</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("report_issue"); }} className={`premium-nav-item text-xs font-bold cursor-pointer transition-colors nav-orange ${activePage === "report_issue" ? "active" : ""}`}>Report Issue</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("live_map"); }} className={`premium-nav-item text-xs font-bold cursor-pointer transition-colors nav-purple ${activePage === "live_map" ? "active" : ""}`}>Live Map</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("city_health"); }} className={`premium-nav-item text-xs font-bold cursor-pointer transition-colors nav-rose ${activePage === "city_health" ? "active" : ""}`}>Outages & Statistics</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("ai_assistant"); }} className={`premium-nav-item text-xs font-bold cursor-pointer transition-colors nav-yellow ${activePage === "ai_assistant" ? "active" : ""}`}>AI Assistant</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("my_reports"); }} className={`premium-nav-item text-xs font-bold cursor-pointer transition-colors nav-teal ${activePage === "my_reports" ? "active" : ""}`}>My Complaints</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("profile"); }} className={`premium-nav-item text-xs font-bold cursor-pointer transition-colors nav-pink ${activePage === "profile" ? "active" : ""}`}>Profile</button>
           </div>
 
           {/* DYNAMIC ROLE SELECTOR (SPECTACULAR SEAMLESS TESTING PROTOCOL!) */}

@@ -127,7 +127,7 @@ export default function CitizenDashboard({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* City Health Score Widget */}
-            <div className="bg-white p-6 rounded-[2rem] border border-slate-250 shadow-md flex items-center justify-between gap-4 relative overflow-hidden group">
+            <div className="card-premium-green p-6 rounded-[2rem] shadow-md flex items-center justify-between gap-4 relative overflow-hidden group">
               <div className="flex flex-col justify-between h-full gap-5">
                 <div>
                   <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block font-mono">Dynamic Performance</span>
@@ -136,7 +136,7 @@ export default function CitizenDashboard({
                 <div className="flex items-baseline gap-1.5">
                   <span className="text-5xl font-black text-slate-900 font-display">{cityHealthScore}</span>
                   <span className="text-xs text-slate-400 font-mono">/100</span>
-                  <span className="ml-2 text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-full uppercase">
+                  <span className="ml-2 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-full uppercase">
                     Excellent
                   </span>
                 </div>
@@ -163,12 +163,12 @@ export default function CitizenDashboard({
                     <circle cx="115" cy="5" r="7" stroke="#10B981" strokeWidth="1.5" fill="none" className="animate-ping" />
                   </svg>
                 </div>
-                <span className="text-[9px] font-mono font-bold text-slate-400 uppercase">Mon &gt; Sun Trend</span>
+                <span className="text-[9px] font-mono font-bold text-emerald-800 uppercase">Mon &gt; Sun Trend</span>
               </div>
             </div>
 
             {/* Your Contributions Stat Widget */}
-            <div className="bg-white p-6 rounded-[2rem] border border-slate-250 shadow-md flex items-center justify-between gap-6 relative overflow-hidden">
+            <div className="card-premium-green p-6 rounded-[2rem] shadow-md flex items-center justify-between gap-6 relative overflow-hidden">
               <div className="flex flex-col justify-between h-full gap-5">
                 <div>
                   <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block font-mono">Your Contributions</span>
@@ -181,13 +181,13 @@ export default function CitizenDashboard({
                   </div>
                   <div className="border-r border-slate-200 h-9 my-auto" />
                   <div>
-                    <span className="block text-2xl font-black text-amber-500 font-display">340</span>
+                    <span className="block text-2xl font-black text-[#059669] font-display">340</span>
                     <span className="text-[10px] text-slate-400 font-mono uppercase font-bold tracking-wider">Points</span>
                   </div>
                 </div>
               </div>
 
-              <div className="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center border border-amber-100 text-amber-500 shadow-sm animate-pulse">
+              <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center border border-emerald-100 text-[#059669] shadow-sm animate-pulse">
                 <Trophy className="w-7 h-7" />
               </div>
             </div>
@@ -199,72 +199,71 @@ export default function CitizenDashboard({
             <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 font-mono mb-4">
               Quick Actions Panel
             </h3>
-            
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               
               {/* Report Issue Action */}
               <button 
                 onClick={() => onNavigate("report_issue")}
-                className="bg-white hover:bg-slate-50 p-5 rounded-2xl border border-slate-180 hover:border-sky-300 shadow-sm transition-all text-center flex flex-col items-center gap-3 cursor-pointer group"
+                className="card-premium-orange p-5 rounded-2xl text-center flex flex-col items-center gap-3 cursor-pointer group"
               >
-                <div className="w-12 h-12 rounded-full bg-blue-50 text-sky-600 flex items-center justify-center border border-blue-100 group-hover:scale-105 transition-transform shadow-inner">
+                <div className="w-12 h-12 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center border border-orange-100 group-hover:scale-105 transition-transform shadow-inner">
                   <Camera className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-extrabold text-slate-900">Report Issue</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5 leading-tight font-light">Dispatches instantly</p>
+                  <h4 className="text-xs font-extrabold text-slate-900 font-display">Report Issue</h4>
+                  <p className="text-[10px] text-orange-700/60 mt-0.5 leading-tight font-normal">Dispatches instantly</p>
                 </div>
               </button>
 
               {/* Live Map Action */}
               <button 
                 onClick={() => onNavigate("live_map")}
-                className="bg-white hover:bg-slate-50 p-5 rounded-2xl border border-slate-180 hover:border-emerald-300 shadow-sm transition-all text-center flex flex-col items-center gap-3 cursor-pointer group"
+                className="card-premium-purple p-5 rounded-2xl text-center flex flex-col items-center gap-3 cursor-pointer group"
               >
-                <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 group-hover:scale-105 transition-transform shadow-inner">
+                <div className="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100 group-hover:scale-105 transition-transform shadow-inner">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-extrabold text-slate-900">Live Map</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5 leading-tight font-light">Outages & grids</p>
+                  <h4 className="text-xs font-extrabold text-slate-900 font-display">Live Map</h4>
+                  <p className="text-[10px] text-purple-700/60 mt-0.5 leading-tight font-normal">Outages & grids</p>
                 </div>
               </button>
 
               {/* AI Assistant Action */}
               <button 
                 onClick={() => onNavigate("ai_assistant")}
-                className="bg-white hover:bg-slate-50 p-5 rounded-2xl border border-slate-180 hover:border-purple-300 shadow-sm transition-all text-center flex flex-col items-center gap-3 cursor-pointer group"
+                className="card-premium-yellow p-5 rounded-2xl text-center flex flex-col items-center gap-3 cursor-pointer group"
               >
-                <div className="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100 group-hover:scale-105 transition-transform shadow-inner">
+                <div className="w-12 h-12 rounded-full bg-yellow-50 text-amber-600 flex items-center justify-center border border-yellow-100 group-hover:scale-105 transition-transform shadow-inner">
                   <Brain className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-extrabold text-slate-900">AI Assistant</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5 leading-tight font-light">CityGPT 24/7 Node</p>
+                  <h4 className="text-xs font-extrabold text-slate-900 font-display">AI Assistant</h4>
+                  <p className="text-[10px] text-amber-700/60 mt-0.5 leading-tight font-normal font-mono">CityGPT 24/7 Node</p>
                 </div>
               </button>
 
               {/* My Complaints Action */}
               <button 
                 onClick={() => onNavigate("my_reports")}
-                className="bg-white hover:bg-slate-50 p-5 rounded-2xl border border-slate-180 hover:border-amber-300 shadow-sm transition-all text-center flex flex-col items-center gap-3 cursor-pointer group"
+                className="card-premium-teal p-5 rounded-2xl text-center flex flex-col items-center gap-3 cursor-pointer group"
               >
-                <div className="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100 group-hover:scale-105 transition-transform shadow-inner">
+                <div className="w-12 h-12 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center border border-teal-100 group-hover:scale-105 transition-transform shadow-inner">
                   <History className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-extrabold text-slate-900">My Complaints</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5 leading-tight font-light">Status tracking</p>
+                  <h4 className="text-xs font-extrabold text-slate-900 font-display">My Complaints</h4>
+                  <p className="text-[10px] text-teal-700/60 mt-0.5 leading-tight font-normal">Status tracking</p>
                 </div>
               </button>
 
               {/* Notifications Action */}
               <button 
-                onClick={() => onNavigate("notifications")}
-                className="bg-white hover:bg-slate-50 p-5 rounded-2xl border border-slate-180 hover:border-pink-300 shadow-sm transition-all text-center flex flex-col items-center gap-3 cursor-pointer group relative"
+                onClick={() => onNavigate("profile")}
+                className="card-premium-pink p-5 rounded-2xl text-center flex flex-col items-center gap-3 cursor-pointer group relative"
               >
                 {unreadNotifs > 0 && (
-                  <span className="absolute top-4 right-8 bg-rose-500 text-white font-extrabold text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center border border-white">
+                  <span className="absolute top-4 right-8 bg-pink-650 text-white font-extrabold text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center border border-white">
                     {unreadNotifs}
                   </span>
                 )}
@@ -272,53 +271,52 @@ export default function CitizenDashboard({
                   <Bell className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-extrabold text-slate-900">Notifications</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5 leading-tight font-light">Broadcast feeds</p>
+                  <h4 className="text-xs font-extrabold text-slate-900 font-display">Notifications</h4>
+                  <p className="text-[10px] text-pink-700/60 mt-0.5 leading-tight font-normal">Broadcast feeds</p>
                 </div>
               </button>
 
               {/* Rewards Action */}
               <button 
                 onClick={() => onNavigate("profile")}
-                className="bg-white hover:bg-slate-50 p-5 rounded-2xl border border-slate-180 hover:border-yellow-300 shadow-sm transition-all text-center flex flex-col items-center gap-3 cursor-pointer group"
+                className="card-premium-green p-5 rounded-2xl text-center flex flex-col items-center gap-3 cursor-pointer group"
               >
-                <div className="w-12 h-12 rounded-full bg-yellow-50 text-yellow-600 flex items-center justify-center border border-yellow-100 group-hover:scale-105 transition-transform shadow-inner">
+                <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 group-hover:scale-105 transition-transform shadow-inner">
                   <Trophy className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-extrabold text-slate-900">Rewards</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5 leading-tight font-light">Badges & Subsidies</p>
+                  <h4 className="text-xs font-extrabold text-slate-900 font-display">Rewards</h4>
+                  <p className="text-[10px] text-emerald-700/60 mt-0.5 leading-tight font-normal">Badges & Subsidies</p>
                 </div>
               </button>
 
               {/* Statistics Action */}
               <button 
                 onClick={() => onNavigate("city_health")}
-                className="bg-white hover:bg-slate-50 p-5 rounded-2xl border border-slate-180 hover:border-blue-300 shadow-sm transition-all text-center flex flex-col items-center gap-3 cursor-pointer group"
+                className="card-premium-rose p-5 rounded-2xl text-center flex flex-col items-center gap-3 cursor-pointer group"
               >
-                <div className="w-12 h-12 rounded-full bg-cyan-50 text-cyan-600 flex items-center justify-center border border-cyan-100 group-hover:scale-105 transition-transform shadow-inner">
+                <div className="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100 group-hover:scale-105 transition-transform shadow-inner">
                   <Activity className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-extrabold text-slate-900">Statistics</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5 leading-tight font-light">Telemetry metrics</p>
+                  <h4 className="text-xs font-extrabold text-slate-900 font-display">Statistics</h4>
+                  <p className="text-[10px] text-rose-700/60 mt-0.5 leading-tight font-normal">Telemetry metrics</p>
                 </div>
               </button>
 
               {/* Profile Action */}
               <button 
                 onClick={() => onNavigate("profile")}
-                className="bg-white hover:bg-slate-50 p-5 rounded-2xl border border-slate-180 hover:border-teal-300 shadow-sm transition-all text-center flex flex-col items-center gap-3 cursor-pointer group"
+                className="card-premium-pink p-5 rounded-2xl text-center flex flex-col items-center gap-3 cursor-pointer group"
               >
-                <div className="w-12 h-12 rounded-full bg-[#E0F2FE] text-sky-800 flex items-center justify-center border border-sky-100 group-hover:scale-105 transition-transform shadow-inner">
+                <div className="w-12 h-12 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center border border-pink-101 group-hover:scale-105 transition-transform shadow-inner">
                   <User className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-extrabold text-slate-900">My Profile</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5 leading-tight font-light">Citizen credential</p>
+                  <h4 className="text-xs font-extrabold text-slate-900 font-display">My Profile</h4>
+                  <p className="text-[10px] text-pink-700/60 mt-0.5 leading-tight font-normal">Citizen credential</p>
                 </div>
               </button>
-
             </div>
           </div>
 
