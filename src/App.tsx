@@ -18,9 +18,9 @@ import AdminDashboard from "./components/AdminDashboard";
 import ReportIssue from "./components/ReportIssue";
 import LiveMap from "./components/LiveMap";
 import AIAssistant from "./components/AIAssistant";
-import Community from "./components/Community";
-import Rewards from "./components/Rewards";
+import Profile from "./components/Profile";
 import Sosemergency from "./components/Sosemergency";
+import LoginPage from "./components/LoginPage";
 
 export default function App() {
   
@@ -203,6 +203,18 @@ export default function App() {
       );
     }
 
+    if (activePage === "login") {
+      return (
+        <LoginPage 
+          onLogin={(role, email) => {
+            setActiveRole(role);
+            setActivePage("dashboard");
+          }}
+          onNavigateHome={() => setActivePage("landing")}
+        />
+      );
+    }
+
     if (activeRole === "citizen") {
       switch (activePage) {
         case "dashboard":
@@ -230,16 +242,17 @@ export default function App() {
           );
         case "ai_assistant":
           return <AIAssistant onSendMessage={handleSendMessageToAI} />;
-        case "community":
+        case "profile":
+        case "rewards":
           return (
-            <Community 
-              posts={communityPosts} 
-              onUpvotePost={handleUpvotePost} 
-              onCreatePost={handleComposeSocialPost} 
+            <Profile 
+              userName="Arpita Maatta"
+              userEmail="mattaarpita04@gmail.com"
+              rewards={rewards} 
+              complaints={complaints}
+              cityHealthScore={cityHealthScore}
             />
           );
-        case "rewards":
-          return <Rewards rewards={rewards} />;
         
         case "my_reports":
           // Citizen reports history list showing detailed track timelines
@@ -417,12 +430,14 @@ export default function App() {
 
           {/* Desktop Nav Selection Links */}
           <div className="hidden lg:flex items-center gap-6">
-            <button onClick={() => setActivePage("landing")} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "landing" ? "text-indigo-400" : "text-neutral-400 hover:text-white"}`}>Home</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("dashboard"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "dashboard" ? "text-indigo-400" : "text-neutral-400 hover:text-white"}`}>Citizen Hub</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("live_map"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "live_map" ? "text-indigo-400" : "text-neutral-400 hover:text-white"}`}>Live Map</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("city_health"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "city_health" ? "text-indigo-400" : "text-neutral-400 hover:text-white"}`}>Outages & Health</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("ai_assistant"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "ai_assistant" ? "text-indigo-400" : "text-neutral-400 hover:text-white"}`}>AI Assistant</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("community"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "community" ? "text-indigo-400" : "text-neutral-400 hover:text-white"}`}>Consensus forum</button>
+            <button onClick={() => setActivePage("landing")} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "landing" ? "text-sky-400" : "text-neutral-400 hover:text-white"}`}>Home</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("dashboard"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "dashboard" ? "text-sky-400" : "text-neutral-400 hover:text-white"}`}>Citizen Hub</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("report_issue"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "report_issue" ? "text-sky-400" : "text-neutral-400 hover:text-white"}`}>Report Issue</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("live_map"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "live_map" ? "text-sky-400" : "text-neutral-400 hover:text-white"}`}>Live Map</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("city_health"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "city_health" ? "text-sky-400" : "text-neutral-400 hover:text-white"}`}>Outages & Statistics</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("ai_assistant"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "ai_assistant" ? "text-sky-400" : "text-neutral-400 hover:text-white"}`}>AI Assistant</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("my_reports"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "my_reports" ? "text-sky-400" : "text-neutral-400 hover:text-white"}`}>My Complaints</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("profile"); }} className={`text-xs font-semibold cursor-pointer transition-colors ${activePage === "profile" ? "text-sky-400" : "text-neutral-400 hover:text-white"}`}>Profile</button>
           </div>
 
           {/* DYNAMIC ROLE SELECTOR (SPECTACULAR SEAMLESS TESTING PROTOCOL!) */}
@@ -494,7 +509,7 @@ export default function App() {
             </div>
 
             {/* Profile Avatar identifier */}
-            <div className="w-10 h-10 bg-indigo-950 text-indigo-400 font-black flex items-center justify-center rounded-xl border border-indigo-500/25 cursor-pointer hover:border-indigo-400 transition-colors" onClick={() => setActivePage("rewards")}>
+            <div className="w-10 h-10 bg-indigo-950 text-indigo-400 font-black flex items-center justify-center rounded-xl border border-indigo-500/25 cursor-pointer hover:border-indigo-400 transition-colors" onClick={() => setActivePage("profile")}>
               AM
             </div>
 
@@ -519,10 +534,11 @@ export default function App() {
           <div className="flex flex-col gap-4 text-sm font-semibold uppercase tracking-wider">
             <button onClick={() => { setActivePage("landing"); setMobileMenuOpen(false); }} className="text-left w-full hover:text-white">Home Landing</button>
             <button onClick={() => { setActiveRole("citizen"); setActivePage("dashboard"); setMobileMenuOpen(false); }} className="text-left w-full hover:text-white">Citizen Dashboard</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("report_issue"); setMobileMenuOpen(false); }} className="text-left w-full hover:text-white">Report Issue</button>
             <button onClick={() => { setActiveRole("citizen"); setActivePage("live_map"); setMobileMenuOpen(false); }} className="text-left w-full hover:text-white">See Live Map</button>
             <button onClick={() => { setActiveRole("citizen"); setActivePage("ai_assistant"); setMobileMenuOpen(false); }} className="text-left w-full hover:text-white">CityGPT AI Assistant</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("community"); setMobileMenuOpen(false); }} className="text-left w-full hover:text-white">Social Consensus Forum</button>
-            <button onClick={() => { setActiveRole("citizen"); setActivePage("rewards"); setMobileMenuOpen(false); }} className="text-left w-full hover:text-white">Citizen subsidy Rewards</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("my_reports"); setMobileMenuOpen(false); }} className="text-left w-full hover:text-white">My Complaints</button>
+            <button onClick={() => { setActiveRole("citizen"); setActivePage("profile"); setMobileMenuOpen(false); }} className="text-left w-full hover:text-white">Profile Credentials</button>
           </div>
 
           {/* Quick Role Selectors */}
