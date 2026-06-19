@@ -255,3 +255,96 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(148, 163, 184, 0.8);
 }
+
+/* 3D Smart City Animations */
+
+/* Gentle wind sway for trees and structures */
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+.animate-sway {
+  animation: sway 6s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* Metro train path flowing translation */
+@keyframes metroAlong {
+  0% {
+    transform: translate(-120px, 140px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(620px, 340px);
+    opacity: 0;
+  }
+}
+.animate-metro {
+  animation: metroAlong 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Dynamic float effect for orbiting cards */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1.5deg); }
+}
+.animate-float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+.animate-float-medium {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-float-fast {
+  animation: float 4.5s ease-in-out infinite;
+}
+
+/* Glowing central power orb pulse and bobbing */
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 25px rgba(99, 102, 241, 0.6)); }
+  50% { transform: translateY(-8px) scale(1.05); filter: drop-shadow(0 0 45px rgba(168, 85, 247, 0.8)); }
+}
+.animate-orb {
+  animation: orbFloat 5s ease-in-out infinite;
+}
+
+/* Constant rotation for wind turbine blades */
+@keyframes spinBlades {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-blades {
+  animation: spinBlades 3s linear infinite;
+  transform-origin: center;
+}
+
+/* Glowing dash road segments */
+@keyframes flowRoad {
+  to {
+    stroke-dashoffset: -80px;
+  }
+}
+.animate-road-glow {
+  animation: flowRoad 2.5s linear infinite;
+}
+
+/* Cyber grid mesh background pattern */
+.cyber-grid {
+  background-image: radial-gradient(rgba(99, 102, 241, 0.15) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+/* Particle rise animation */
+@keyframes particlesRise {
+  0% { transform: translateY(20px); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: translateY(-40px); opacity: 0; }
+}
+.animate-particle {
+  animation: particlesRise 4s ease-out infinite;
+}

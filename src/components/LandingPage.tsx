@@ -99,6 +99,32 @@ export default function LandingPage({ onNavigate, onSetRole, cityHealth }: Landi
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [votedMapItems, setVotedMapItems] = useState<Record<string, boolean>>({});
 
+  // Next-Gen Interactive 3D Parallax & Scroll States
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  React.useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      const rx = (e.clientX / innerWidth) - 0.5;
+      const ry = (e.clientY / innerHeight) - 0.5;
+      setMousePos({ x: rx, y: ry });
+    };
+
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const maxScroll = window.innerHeight || 600;
+      setScrollProgress(Math.min(scrolled / maxScroll, 1));
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   // City Health interactive stats breakdown
   const HEALTH_BREAKDOWN = [
     { name: "Waste Management", score: 84, color: "bg-amber-500", raw: "8.4 / 10 tons", text: "Optimal route dispatches" },
@@ -291,178 +317,465 @@ export default function LandingPage({ onNavigate, onSetRole, cityHealth }: Landi
             </motion.div>
           </div>
 
-           {/* RIGHT SIDE FUTURISTIC ISOMETRIC ARTWORK */}
-          <div className="lg:col-span-6 relative flex justify-center items-center">
+            {/* RIGHT SIDE NEXT-GEN INTERACTIVE 3D SUSPENDED CITY ISLAND */}
+          <div className="lg:col-span-6 relative flex justify-center items-center min-h-[560px] w-full">
             
-            {/* Background neon mesh glow */}
-            <div className="absolute w-[450px] h-[450px] bg-indigo-600/20 rounded-full blur-[110px] -top-10 -z-10 animate-pulse" />
-            <div className="absolute w-[300px] h-[300px] bg-purple-600/15 rounded-full blur-[90px] -bottom-10 -z-10" />
+            {/* Nex-Gen Hero Visual Accents (Mesh Gradients, Aurora Glow, Grid, Bubbles, Particles) */}
+            <div className="absolute -inset-10 bg-gradient-to-tr from-purple-100/30 via-indigo-50/20 to-blue-100/30 blur-[130px] rounded-full -z-10" />
+            <div className="absolute w-[450px] h-[450px] bg-gradient-to-br from-cyan-400/10 via-indigo-500/10 to-transparent rounded-full blur-[100px] -top-12 -right-12 -z-10 animate-pulse" />
+            <div className="absolute w-[350px] h-[350px] bg-gradient-to-tr from-purple-500/10 to-pink-500/10 rounded-full blur-[80px] -bottom-16 -left-16 -z-10" />
+            
+            {/* Subtle Cyber Grid Layer behind the island */}
+            <div className="absolute inset-0 cyber-grid opacity-30 -z-10 pointer-events-none" />
 
-            <div className="relative w-full max-w-lg aspect-[5/4] bg-white rounded-[2rem] p-1.5 border border-slate-100 shadow-2xl relative overflow-hidden group">
-              
-              <div className="relative w-full h-full bg-gradient-to-b from-slate-50 via-indigo-50/10 to-white rounded-[1.8rem] overflow-hidden p-4 flex items-center justify-center">
+            {/* Simulated Floating Glass Bubbles & Noise Texture in Hero Atmosphere */}
+            <div className="absolute top-10 left-12 w-3.5 h-3.5 rounded-full bg-white/40 border border-white/60 shadow-inner blur-[0.5px] animate-float-slow -z-10" />
+            <div className="absolute bottom-20 left-4 w-5 h-5 rounded-full bg-white/30 border border-white/50 shadow-inner blur-[1px] animate-float-medium -z-10" />
+            <div className="absolute top-24 right-10 w-2.5 h-2.5 rounded-full bg-indigo-200/40 border border-white/60 shadow-inner blur-[0.5px] animate-float-fast -z-10" />
+            <div className="absolute bottom-12 right-24 w-4 h-4 rounded-full bg-purple-200/35 border border-white/50 shadow-inner blur-[1px] animate-float-slow -z-10" />
+
+            {/* Ultra-Precise Cursor Parallax Container */}
+            <div 
+              style={{
+                transform: `perspective(1000px) rotateX(${-mousePos.y * 14}deg) rotateY(${mousePos.x * 14}deg) scale(${1 + scrollProgress * 0.04})`,
+                transition: "transform 0.15s cubic-bezier(0.25, 1, 0.5, 1)"
+              }}
+              className="relative w-full max-w-xl aspect-[11/10] bg-white/40 backdrop-blur-xl rounded-[2.5rem] p-2 border border-white/50 shadow-2xl overflow-visible group flex items-center justify-center"
+            >
+              <div className="relative w-full h-full bg-gradient-to-b from-white/90 via-slate-50/50 to-white/95 rounded-[2.3rem] overflow-hidden p-2 flex items-center justify-center border border-slate-100">
                 
-                {/* SVG Isometric Smart City Layout */}
-                <svg className="absolute inset-0 w-full h-full text-slate-100" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {/* Grid Lines */}
-                  <pattern id="smart-grid" width="30" height="15" patternUnits="userSpaceOnUse" patternTransform="rotate(26)">
-                    <path d="M 30 0 L 0 0 0 15" fill="none" stroke="rgba(99,102,241,0.06)" strokeWidth="1" />
-                  </pattern>
-                  <rect width="500" height="400" fill="url(#smart-grid)" />
-
-                  {/* Sun / Solar power background accent */}
-                  <circle cx="250" cy="160" r="140" fill="url(#heroSunGlow)" opacity="0.9" />
+                {/* SVG 3D Isometric suspended Island, Buildings & Infrastructure Canvas */}
+                <svg className="absolute inset-0 w-full h-full overflow-hidden" viewBox="0 0 600 550" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Neon Glow & Drop Shadows Definitions */}
                   <defs>
-                    <radialGradient id="heroSunGlow" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#818CF8" stopOpacity="0.2" />
+                    <radialGradient id="sun-glow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#818CF8" stopOpacity="0.25" />
                       <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
                     </radialGradient>
+                    <linearGradient id="grass-grad" x1="120" y1="330" x2="300" y2="430" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor="#ECFDF5" />
+                      <stop offset="50%" stopColor="#D1FAE5" />
+                      <stop offset="100%" stopColor="#A7F3D0" />
+                    </linearGradient>
+                    <linearGradient id="rock-left" x1="120" y1="330" x2="300" y2="490" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor="#475569" />
+                      <stop offset="100%" stopColor="#1E293B" />
+                    </linearGradient>
+                    <linearGradient id="rock-right" x1="300" y1="430" x2="480" y2="490" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor="#334155" />
+                      <stop offset="100%" stopColor="#0F172A" />
+                    </linearGradient>
+                    <linearGradient id="river-glow" x1="280" y1="241" x2="270" y2="413" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.8" />
+                      <stop offset="50%" stopColor="#3B82F6" stopOpacity="0.9" />
+                      <stop offset="100%" stopColor="#6366F1" stopOpacity="0.95" />
+                    </linearGradient>
+                    
+                    {/* Glass Tower Shader Gradients (Semi-Transparent Multi-tone) */}
+                    <linearGradient id="yellow-glass-left" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(254, 240, 138, 0.75)" />
+                      <stop offset="100%" stopColor="rgba(234, 179, 8, 0.35)" />
+                    </linearGradient>
+                    <linearGradient id="yellow-glass-right" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(255, 253, 222, 0.85)" />
+                      <stop offset="100%" stopColor="rgba(250, 204, 21, 0.45)" />
+                    </linearGradient>
+
+                    <linearGradient id="purple-glass-left" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(233, 213, 255, 0.75)" />
+                      <stop offset="100%" stopColor="rgba(168, 85, 247, 0.4)" />
+                    </linearGradient>
+                    <linearGradient id="purple-glass-right" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(245, 243, 255, 0.85)" />
+                      <stop offset="100%" stopColor="rgba(192, 132, 252, 0.5)" />
+                    </linearGradient>
+
+                    <linearGradient id="orange-glass-left" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(255, 237, 213, 0.75)" />
+                      <stop offset="100%" stopColor="rgba(249, 115, 22, 0.4)" />
+                    </linearGradient>
+                    <linearGradient id="orange-glass-right" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(255, 247, 237, 0.85)" />
+                      <stop offset="100%" stopColor="rgba(251, 146, 60, 0.5)" />
+                    </linearGradient>
+
+                    <linearGradient id="rose-glass-left" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(255, 228, 230, 0.75)" />
+                      <stop offset="100%" stopColor="rgba(244, 63, 94, 0.4)" />
+                    </linearGradient>
+                    <linearGradient id="rose-glass-right" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(255, 241, 242, 0.85)" />
+                      <stop offset="100%" stopColor="rgba(251, 113, 133, 0.5)" />
+                    </linearGradient>
+
+                    <linearGradient id="emerald-glass-left" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(209, 250, 229, 0.75)" />
+                      <stop offset="100%" stopColor="rgba(16, 185, 129, 0.4)" />
+                    </linearGradient>
+                    <linearGradient id="emerald-glass-right" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(240, 253, 244, 0.85)" />
+                      <stop offset="100%" stopColor="rgba(52, 211, 153, 0.5)" />
+                    </linearGradient>
+
+                    <linearGradient id="teal-glass-left" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(204, 251, 241, 0.75)" />
+                      <stop offset="100%" stopColor="rgba(20, 184, 166, 0.4)" />
+                    </linearGradient>
+                    <linearGradient id="teal-glass-right" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(240, 253, 250, 0.85)" />
+                      <stop offset="100%" stopColor="rgba(45, 212, 191, 0.5)" />
+                    </linearGradient>
+
+                    <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="6" result="blur" />
+                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                    <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                      <feDropShadow dx="0" dy="12" stdDeviation="8" floodColor="#0F172A" floodOpacity="0.25" />
+                    </filter>
                   </defs>
 
-                  {/* Isometric Skyscrapers outlines with Cyber Grid style */}
-                  {/* Building 1 (Left) */}
-                  <g transform="translate(60, 110)">
-                    <path d="M 0 60 L 30 40 L 60 60 L 60 160 L 30 180 L 0 160 Z" fill="#E2E8F0" stroke="#4F46E5" strokeWidth="1" opacity="0.8" />
-                    <path d="M 30 40 L 60 60 L 60 160 L 30 180 Z" fill="#F1F5F9" stroke="#4F46E5" strokeWidth="1" opacity="0.6" />
-                    <path d="M 30 40 L 30 180" stroke="#6366F1" strokeWidth="1" opacity="0.4" />
-                    <line x1="12" y1="75" x2="25" y2="68" stroke="#38BDF8" strokeWidth="1.5" />
-                    <line x1="12" y1="95" x2="25" y2="88" stroke="#10B981" strokeWidth="1.5" />
-                    <line x1="12" y1="115" x2="25" y2="108" stroke="#38BDF8" strokeWidth="1.5" />
-                    <line x1="12" y1="135" x2="25" y2="128" stroke="#F43F5E" strokeWidth="1.5" />
+                  {/* Sun Rise Ambient Background Glow */}
+                  <circle cx="300" cy="270" r="220" fill="url(#sun-glow)" opacity="0.9" />
+
+                  {/* 1. SUSPENDED ISOMETRIC PLATFORM ISLAND BASE */}
+                  <g filter="url(#soft-shadow)">
+                    {/* Dark under-rocks thickness first to create the high-altitude floating illusion */}
+                    {/* Geological Left face */}
+                    <path d="M 120 330 L 300 430 L 300 485 L 120 385 Z" fill="url(#rock-left)" />
+                    {/* Geological Right face */}
+                    <path d="M 300 430 L 480 330 L 480 385 L 300 485 Z" fill="url(#rock-right)" />
+                    {/* Shard protrusion 1 */}
+                    <path d="M 180 363 L 230 460 L 230 480 L 180 380 Z" fill="#334155" opacity="0.85" />
+                    {/* Shard protrusion 2 */}
+                    <path d="M 400 373 L 340 470 L 340 485 L 400 385 Z" fill="#1E293B" opacity="0.9" />
+
+                    {/* Top Grassland Surface */}
+                    <path d="M 300 230 L 120 330 L 300 430 L 480 330 Z" fill="url(#grass-grad)" stroke="#FFFFFF" strokeWidth="2" />
                   </g>
 
-                  {/* Building 2 (Center Highrise) */}
-                  <g transform="translate(180, 50)">
-                    <path d="M 0 80 L 40 50 L 80 80 L 80 230 L 40 260 L 0 230 Z" fill="#ECE9F7" stroke="#A855F7" strokeWidth="1" opacity="0.9" />
-                    <path d="M 40 50 L 80 80 L 80 230 L 40 260 Z" fill="#F5F3FF" stroke="#A855F7" strokeWidth="1" opacity="0.75" />
-                    <path d="M 40 50 L 40 260" stroke="#C084FC" strokeWidth="1.5" opacity="0.4" />
-                    {/* Glowing Cyber windows */}
-                    <circle cx="20" cy="95" r="2.5" fill="#38BDF8" />
-                    <circle cx="20" cy="115" r="2.5" fill="#F43F5E" />
-                    <circle cx="20" cy="135" r="2.5" fill="#EAB308" />
-                    <circle cx="20" cy="155" r="2.5" fill="#10B981" />
-                    <circle cx="20" cy="175" r="2.5" fill="#38BDF8" />
-                    <circle cx="60" cy="110" r="2" fill="#EAB308" opacity="0.9" />
-                    <circle cx="60" cy="130" r="2" fill="#38BDF8" opacity="0.9" />
-                    <circle cx="60" cy="150" r="2" fill="#10B981" opacity="0.9" />
-                    <circle cx="60" cy="170" r="2" fill="#C084FC" opacity="0.9" />
-                  </g>
+                  {/* 2. THE FLOWING CONICAL GLOWING RIVER (With Reflections) */}
+                  <path d="M 285 242 L 270 413 C 275 420, 290 425, 305 422 L 315 242 Z" fill="url(#river-glow)" opacity="0.95" />
+                  {/* Moving River highlights */}
+                  <path d="M 288 245 L 274 410" stroke="#E0F7FA" strokeWidth="1.5" strokeDasharray="10 25" opacity="0.7" />
+                  <path d="M 310 250 L 298 420" stroke="#FFFFFF" strokeWidth="1" strokeDasharray="15 30" opacity="0.8" />
 
-                  {/* Building 3 (Eco-Glass Tower Right) */}
-                  <g transform="translate(320, 80)">
-                    <path d="M 0 70 L 35 45 L 70 70 L 70 200 L 35 220 L 0 200 Z" fill="#ECFDF5" stroke="#10B981" strokeWidth="1" opacity="0.8" />
-                    <path d="M 35 45 L 70 70 L 70 200 L 35 220 Z" fill="#F0FDF4" stroke="#10B981" strokeWidth="1" opacity="0.6" />
-                    <path d="M 35 45 L 35 220" stroke="#34D399" strokeWidth="1" opacity="0.4" />
-                    <line x1="15" y1="90" x2="30" y2="82" stroke="#34D399" strokeWidth="2" opacity="0.8" />
-                    <line x1="15" y1="120" x2="30" y2="112" stroke="#38BDF8" strokeWidth="2" opacity="0.8" />
-                    <line x1="15" y1="150" x2="30" y2="142" stroke="#A855F7" strokeWidth="2" opacity="0.8" />
-                  </g>
-
-                  {/* Curved smart roads */}
-                  <path d="M 0 320 C 150 280, 250 290, 500 350" stroke="#E2E8F0" strokeWidth="22" fill="none" opacity="0.9" />
-                  <path d="M 0 320 C 150 280, 250 290, 500 350" stroke="#94A3B8" strokeWidth="2" strokeDasharray="6 6" fill="none" />
+                  {/* 3. ROADS WITH FLOWING TESLA FSD LIGHT TRAILS */}
+                  {/* Base Road Track (Dark Slate) */}
+                  <path d="M 134 322 C 220 280, 260 360, 466 322" stroke="#1E293B" strokeWidth="12" strokeLinecap="round" fill="none" opacity="0.9" />
+                  <path d="M 150 250 C 190 320, 390 320, 430 250" stroke="#334155" strokeWidth="10" strokeLinecap="round" fill="none" opacity="0.85" />
                   
-                  {/* Highspeed Metro train route curving on top piers */}
-                  <path d="M 0 260 Q 250 210, 500 280" stroke="rgba(99,102,241,0.2)" strokeWidth="8" fill="none" />
-                  <path d="M 0 260 Q 250 210, 500 280" stroke="#6366F1" strokeWidth="1.5" strokeDasharray="4 4" fill="none" />
+                  {/* Flowing animated blue neon guide markings */}
+                  <path className="animate-road-glow" d="M 134 322 C 220 280, 260 360, 466 322" stroke="#38BDF8" strokeWidth="1.5" strokeDasharray="12 40" fill="none" filter="url(#neon-glow)" />
+                  <path className="animate-road-glow" style={{ animationDirection: "reverse" }} d="M 150 250 C 190 320, 390 320, 430 250" stroke="#00F0FF" strokeWidth="1.5" strokeDasharray="10 30" fill="none" filter="url(#neon-glow)" />
 
-                  {/* Drones flying in airspace */}
-                  <g transform="translate(130, 130)">
-                    <ellipse cx="15" cy="15" rx="12" ry="5" fill="#94A3B8" />
-                    <line x1="3" y1="15" x2="27" y2="15" stroke="#94A3B8" strokeWidth="1.5" />
-                    <circle cx="3" cy="11" r="2.5" fill="#38BDF8" />
-                    <circle cx="27" cy="11" r="2.5" fill="#38BDF8" />
+                  {/* Tiny moving cars along the lanes */}
+                  {/* Red Car */}
+                  <g className="animate-road-glow" style={{ animationDuration: "5s" }}>
+                    <rect x="0" y="0" width="10" height="5" rx="1.5" fill="#EF4444" transform="translate(180, 305) rotate(-15)" />
+                    <circle cx="182" cy="308" r="1" fill="#E2E8F0" />
                   </g>
-                  
-                  <g transform="translate(380, 110)">
-                    <ellipse cx="12" cy="12" rx="10" ry="4" fill="#64748B" />
-                    <line x1="2" y1="12" x2="22" y2="12" stroke="#64748B" strokeWidth="1" />
-                    <circle cx="22" cy="9" r="2" fill="#F43F5E" />
+                  {/* Cyan Tech Vehicle */}
+                  <g className="animate-road-glow" style={{ animationDuration: "4s", animationDirection: "reverse" }}>
+                    <rect x="0" y="0" width="11" height="5.5" rx="1.5" fill="#06B6D4" transform="translate(350, 290) rotate(10)" />
+                    <circle cx="359" cy="293" r="1.2" fill="#FFFFFF" />
                   </g>
 
-                  {/* Small vector Cars on Roads */}
-                  <g transform="translate(80, 300)">
-                    <rect x="0" y="0" width="16" height="8" rx="2.5" fill="#F43F5E" />
-                    <circle cx="4" cy="8" r="1.8" fill="#CBD5E1" />
-                    <circle cx="12" cy="8" r="1.8" fill="#CBD5E1" />
+                  {/* 4. DRAGGABLE/RISING HIGH-FIDELITY GLASS SKYSCRAPERS */}
+                  {/* Scroll trigger vertical compression applied dynamically below */}
+
+                  {/* TOWER 1: AI Assistant Core (Yellow Glass Tower - Center back) */}
+                  <g transform="translate(275, 120)" style={{ transform: `translate(275px, ${120 + scrollProgress * 15}px) scaleY(${1.1 - scrollProgress * 0.1})`, transformOrigin: "bottom center" }}>
+                    <polygon points="0,110 -25,95 -25,0 0,15" fill="url(#yellow-glass-left)" stroke="#EAB308" strokeWidth="1" strokeOpacity="0.5" />
+                    <polygon points="0,110 25,95 25,0 0,15" fill="url(#yellow-glass-right)" stroke="#EAB308" strokeWidth="1" strokeOpacity="0.5" />
+                    <polygon points="0,15 -25,0 0,-15 25,0" fill="rgba(255, 253, 222, 0.95)" stroke="#FDE047" strokeWidth="0.8" />
+                    {/* Glowing Server Rack horizontal slices */}
+                    <line x1="-15" y1="30" x2="15" y2="45" stroke="#FFFFFF" strokeWidth="1" opacity="0.8" />
+                    <line x1="-15" y1="50" x2="15" y2="65" stroke="#FDE047" strokeWidth="1" opacity="0.9" />
+                    <line x1="-15" y1="70" x2="15" y2="85" stroke="#EAB308" strokeWidth="1.2" opacity="0.8" />
+                    {/* Antenna */}
+                    <line x1="0" y1="-15" x2="0" y2="-40" stroke="#EAB308" strokeWidth="1.5" />
+                    <circle cx="0" cy="-40" r="3" fill="#EF4444" className="animate-pulse" />
                   </g>
-                  <g transform="translate(340, 318)">
-                    <rect x="0" y="0" width="18" height="8" rx="2.5" fill="#6366F1" />
-                    <circle cx="4" cy="8" r="1.8" fill="#CBD5E1" />
-                    <circle cx="14" cy="8" r="1.8" fill="#CBD5E1" />
+
+                  {/* TOWER 2: Live Map Satellite Node (Purple Glass Tower - Mid Left) */}
+                  <g transform="translate(195, 175)" style={{ transform: `translate(195px, ${175 + scrollProgress * 10}px) scaleY(${1.08 - scrollProgress * 0.08})`, transformOrigin: "bottom center" }}>
+                    <polygon points="0,105 -22,90 -22,0 0,15" fill="url(#purple-glass-left)" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.5" />
+                    <polygon points="0,105 22,90 22,0 0,15" fill="url(#purple-glass-right)" stroke="#8B5CF6" strokeWidth="1" strokeOpacity="0.5" />
+                    <polygon points="0,15 -22,0 0,-15 22,0" fill="rgba(243, 232, 255, 0.9)" stroke="#C084FC" strokeWidth="1" />
+                    {/* Glowing circuit nodes */}
+                    <circle cx="-10" cy="40" r="2" fill="#A78BFA" />
+                    <circle cx="10" cy="55" r="2" fill="#D8B4FE" />
+                    {/* Radar Dish */}
+                    <path d="M -10 -5 L 10 -5 A 10 10 0 0 1 -10 -5 Z" fill="#8B5CF6" transform="translate(0, -10) rotate(-15)" />
+                    <line x1="0" y1="-10" x2="10" y2="-22" stroke="#A78BFA" strokeWidth="1.5" />
                   </g>
 
-                  {/* Tiny isometric trees and characters walking */}
-                  {/* Trees */}
-                  <circle cx="30" cy="350" r="7" fill="#059669" />
-                  <circle cx="35" cy="345" r="5" fill="#34D399" />
-                  <circle cx="140" cy="330" r="8" fill="#059669" />
-                  <circle cx="450" cy="370" r="9" fill="#059669" />
+                  {/* TOWER 3: Report Issue Dispatch Hub (Orange Glass Tower - Mid Right) */}
+                  <g transform="translate(365, 185)" style={{ transform: `translate(365px, ${185 + scrollProgress * 20}px) scaleY(${1.15 - scrollProgress * 0.12})`, transformOrigin: "bottom center" }}>
+                    <polygon points="0,110 -24,95 -24,0 0,15" fill="url(#orange-glass-left)" stroke="#F97316" strokeWidth="1" strokeOpacity="0.4" />
+                    <polygon points="0,110 24,95 24,0 0,15" fill="url(#orange-glass-right)" stroke="#F97316" strokeWidth="1" strokeOpacity="0.4" />
+                    <polygon points="0,15 -24,0 0,-15 24,0" fill="rgba(254, 243, 199, 0.95)" stroke="#FDBA74" strokeWidth="0.8" />
+                    {/* Glass architectural diagonal stripes */}
+                    <line x1="-18" y1="20" x2="18" y2="50" stroke="#FFEDD5" strokeWidth="1.5" opacity="0.65" />
+                    <line x1="-18" y1="50" x2="18" y2="80" stroke="#FFD8A8" strokeWidth="1.5" opacity="0.65" />
+                  </g>
 
-                  {/* People walking */}
-                  <circle cx="280" cy="315" r="2.5" fill="#64748B" />
-                  <line x1="280" y1="317" x2="280" y2="323" stroke="#64748B" strokeWidth="1" />
-                  
-                  <circle cx="295" cy="318" r="2.5" fill="#F43F5E" />
-                  <line x1="295" y1="320" x2="295" y2="326" stroke="#F43F5E" strokeWidth="1" />
+                  {/* TOWER 4: Outages & Statistics Tracker (Rose Glass Tower - Front Left) */}
+                  <g transform="translate(155, 230)" style={{ transform: `translate(155px, ${230 + scrollProgress * 5}px) scaleY(${1.05 - scrollProgress * 0.05})`, transformOrigin: "bottom center" }}>
+                    <polygon points="0,95 -20,80 -20,0 0,15" fill="url(#rose-glass-left)" stroke="#F43F5E" strokeWidth="0.8" strokeOpacity="0.4" />
+                    <polygon points="0,95 20,80 20,0 0,15" fill="url(#rose-glass-right)" stroke="#F43F5E" strokeWidth="0.8" strokeOpacity="0.4" />
+                    <polygon points="0,15 -20,0 0,-15 20,0" fill="rgba(254, 241, 242, 0.95)" stroke="#FDA4AF" strokeWidth="0.8" />
+                    {/* Step telemetry displays */}
+                    <rect x="-12" y="30" width="6" height="15" fill="#FDA4AF" opacity="0.9" />
+                    <rect x="6" y="45" width="6" height="25" fill="#F43F5E" opacity="0.9" />
+                  </g>
 
-                  {/* Pin Drop Wave Rings */}
-                  <g transform="translate(250, 240)">
-                    <circle cx="0" cy="0" r="12" fill="none" stroke="#6366F1" strokeWidth="1.5" className="animate-ping" opacity="0.6" />
-                    <circle cx="0" cy="0" r="5" fill="#6366F1" />
+                  {/* TOWER 5: Citizen Hub & Eco-Rewards Terminal (Emerald Glass Tower - Front Right) */}
+                  <g transform="translate(425, 220)" style={{ transform: `translate(425px, ${220 + scrollProgress * 12}px) scaleY(${1.1 - scrollProgress * 0.1})`, transformOrigin: "bottom center" }}>
+                    <polygon points="0,100 -21,85 -21,0 0,15" fill="url(#emerald-glass-left)" stroke="#10B981" strokeWidth="0.8" strokeOpacity="0.4" />
+                    <polygon points="0,100 21,85 21,0 0,15" fill="url(#emerald-glass-right)" stroke="#10B981" strokeWidth="0.8" strokeOpacity="0.4" />
+                    <polygon points="0,15 -21,0 0,-15 21,0" fill="rgba(240, 253, 244, 0.95)" stroke="#6EE7B7" strokeWidth="0.8" />
+                    
+                    {/* Embedded micro wind turbine */}
+                    <g transform="translate(0, 35)">
+                      <line x1="0" y1="0" x2="0" y2="40" stroke="#34D399" strokeWidth="1.5" />
+                      {/* Spinning blades cross */}
+                      <g className="animate-spin-blades">
+                        <line x1="-12" y1="-12" x2="12" y2="12" stroke="#FFFFFF" strokeWidth="1.5" />
+                        <line x1="12" y1="-12" x2="-12" y2="12" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
+                      </g>
+                    </g>
+                  </g>
+
+                  {/* TOWER 6: My Complaints Registry (Teal Glass Tower - Front Center) */}
+                  <g transform="translate(305, 260)" style={{ transform: `translate(305px, ${260 + scrollProgress * 8}px) scaleY(${1.06 - scrollProgress * 0.06})`, transformOrigin: "bottom center" }}>
+                    <polygon points="0,95 -20,80 -20,0 0,15" fill="url(#teal-glass-left)" stroke="#14B8A6" strokeWidth="0.8" strokeOpacity="0.4" />
+                    <polygon points="0,95 20,80 20,0 0,15" fill="url(#teal-glass-right)" stroke="#14B8A6" strokeWidth="0.8" strokeOpacity="0.4" />
+                    <polygon points="0,15 -20,0 0,-15 20,0" fill="rgba(204, 251, 241, 0.95)" stroke="#5EEAD4" strokeWidth="0.8" />
+                  </g>
+
+                  {/* 5. METRO BULLET TRAIN CONTINUOUSLY MOVING */}
+                  {/* Raised monorail rail track piers & concrete curve */}
+                  <path d="M 100 290 Q 300 240, 500 290" stroke="rgba(255,255,255,0.3)" strokeWidth="5" fill="none" />
+                  <path d="M 100 290 Q 300 240, 500 290" stroke="#6366F1" strokeWidth="1" strokeDasharray="3 3" fill="none" opacity="0.8" />
+                  <line x1="180" y1="274" x2="180" y2="330" stroke="#94A3B8" strokeWidth="1.5" opacity="0.5" />
+                  <line x1="300" y1="264" x2="300" y2="320" stroke="#94A3B8" strokeWidth="1.5" opacity="0.5" />
+                  <line x1="420" y1="274" x2="420" y2="330" stroke="#94A3B8" strokeWidth="1.5" opacity="0.5" />
+
+                  {/* Cyber metro train moving on custom loop keyframe */}
+                  <g className="animate-metro">
+                    {/* Multi-compartment glass bullet train */}
+                    {/* Car 1 */}
+                    <rect x="0" y="0" width="22" height="7.5" rx="3" fill="#FFFFFF" fillOpacity="0.9" stroke="#4F46E5" strokeWidth="1" transform="translate(0, 0) rotate(2)" />
+                    <rect x="4" y="2" width="14" height="2" fill="#38BDF8" />
+                    {/* Car 2 (Connected) */}
+                    <rect x="-26" y="0" width="22" height="7.5" rx="3" fill="#FFFFFF" fillOpacity="0.9" stroke="#4F46E5" strokeWidth="1" transform="translate(0, 0) rotate(2)" />
+                    <rect x="-22" y="2" width="14" height="2" fill="#38BDF8" />
+                  </g>
+
+                  {/* 6. SWAYING TREES & SPINNING MICRO SOLAR ARRAYS */}
+                  {/* Tree cluster Left */}
+                  <g transform="translate(160, 345)" className="animate-sway">
+                    <circle cx="0" cy="0" r="10" fill="url(#grass-grad)" />
+                    <circle cx="5" cy="-4" r="8" fill="#10B981" opacity="0.9" />
+                    <line x1="0" y1="4" x2="0" y2="15" stroke="#10B981" strokeWidth="1.5" />
+                  </g>
+                  {/* Tree cluster Right */}
+                  <g transform="translate(435, 345)" className="animate-sway" style={{ animationDelay: "1s" }}>
+                    <circle cx="0" cy="0" r="12" fill="#059669" />
+                    <circle cx="-6" cy="-4" r="9" fill="#34D399" opacity="0.95" />
+                    <line x1="0" y1="5" x2="0" y2="18" stroke="#047857" strokeWidth="2" />
+                  </g>
+
+                  {/* Micro Solar Panels Array */}
+                  <g transform="translate(240, 360)">
+                    {/* Panel 1 */}
+                    <polygon points="0,10 15,5 20,12 5,17" fill="#1E3A8A" stroke="#3B82F6" strokeWidth="0.8" />
+                    <line x1="10" y1="11" x2="10" y2="22" stroke="#475569" strokeWidth="1" />
+                    {/* Panel 2 */}
+                    <polygon points="18,12 33,7 38,14 23,19" fill="#1e3A8A" stroke="#3B82F6" strokeWidth="0.8" />
+                    <line x1="28" y1="13" x2="28" y2="24" stroke="#475569" strokeWidth="1" />
+                  </g>
+
+                  {/* 7. FLYING DRONES & PULSING INCIDENT PINS */}
+                  {/* Bobbing drone */}
+                  <g className="animate-float-medium" style={{ animationDuration: "5s" }}>
+                    <path d="M 230 180 Q 240 170, 250 180" stroke="#475569" strokeWidth="3" fill="none" />
+                    <line x1="225" y1="175" x2="255" y2="175" stroke="#334155" strokeWidth="1.5" />
+                    <circle cx="225" cy="172" r="2" fill="#10B981" />
+                    <circle cx="255" cy="172" r="2" fill="#10B981" />
+                    <circle cx="240" cy="180" r="3" fill="#1E293B" />
+                  </g>
+
+                  {/* Active pulsing GIS map pins */}
+                  <g transform="translate(305, 305)">
+                    {/* Pointer 1 */}
+                    <circle cx="0" cy="0" r="14" fill="none" stroke="#F43F5E" strokeWidth="1.5" className="animate-ping" opacity="0.6" />
+                    <circle cx="0" cy="0" r="5" fill="#F43F5E" />
+                  </g>
+                  <g transform="translate(210, 240)">
+                    {/* Pointer 2 */}
+                    <circle cx="0" cy="0" r="11" fill="none" stroke="#3B82F6" strokeWidth="1.2" className="animate-ping" opacity="0.5" style={{ animationDelay: "1s" }} />
+                    <circle cx="0" cy="0" r="4" fill="#3B82F6" />
+                  </g>
+
+                  {/* Dynamic Drifting Atmosphere Clouds (drifting behind central orb) */}
+                  <path className="animate-float-slow" d="M 120 110 C 130 100, 150 100, 160 110 C 170 105, 185 110, 180 120 C 170 130, 130 130, 120 110 Z" fill="#FFFFFF" fillOpacity="0.75" />
+                  <path className="animate-float-medium" style={{ animationDelay: "2.5s" }} d="M 410 140 C 420 130, 440 130, 450 140 C 460 135, 470 140, 465 150 C 455 160, 420 160, 410 140 Z" fill="#FFFFFF" fillOpacity="0.7" />
+
+                  {/* 8. 3D HOLOGRAPHIC AI BRAIN ORB (Brain of CityGPT) */}
+                  <g transform="translate(300, 90)" className="animate-orb">
+                    {/* Energy glow waves */}
+                    <circle cx="0" cy="0" r="45" fill="none" stroke="#818CF8" strokeWidth="0.8" className="animate-ping" opacity="0.3" />
+                    <circle cx="0" cy="0" r="30" fill="none" stroke="#C084FC" strokeWidth="1.2" className="animate-ping" opacity="0.5" style={{ animationDelay: "1.5s" }} />
+                    
+                    {/* Concentric rotating glowing rings */}
+                    <circle cx="0" cy="0" r="22" fill="none" stroke="rgba(99, 102, 241, 0.4)" strokeWidth="2.5" strokeDasharray="14 14" className="animate-spin-blades" style={{ animationDuration: "12s" }} />
+                    <circle cx="0" cy="0" r="16" fill="none" stroke="rgba(168, 85, 247, 0.6)" strokeWidth="1.5" strokeDasharray="10 10" className="animate-spin-blades" style={{ animationDuration: "8s", animationDirection: "reverse" }} />
+
+                    {/* Central glowing gradient Core Orb */}
+                    <circle cx="0" cy="0" r="12" fill="url(#orb-grad)" filter="url(#neon-glow)" />
+                    <defs>
+                      <radialGradient id="orb-grad" cx="30%" cy="30%" r="70%">
+                        <stop offset="0%" stopColor="#FFFFFF" />
+                        <stop offset="40%" stopColor="#38BDF8" />
+                        <stop offset="80%" stopColor="#6366F1" />
+                        <stop offset="100%" stopColor="#4F46E5" />
+                      </radialGradient>
+                    </defs>
+
+                    {/* Neural Network connector nodes projecting downwards to buildings */}
+                    <line x1="0" y1="12" x2="-25" y2="55" stroke="rgba(168, 85, 247, 0.5)" strokeWidth="1" strokeDasharray="3 3" />
+                    <line x1="0" y1="12" x2="25" y2="60" stroke="rgba(249, 115, 22, 0.5)" strokeWidth="1" strokeDasharray="3 3" />
+                    <line x1="0" y1="12" x2="0" y2="35" stroke="rgba(234, 179, 8, 0.5)" strokeWidth="1" strokeDasharray="3 3" />
+                  </g>
+
+                  {/* 9. HIGH-VISIBILITY CONNECTING NEON VECTOR LASER MARKERS TO PORTAL CARDS */}
+                  {/* Floating cards are positioned absolutely around outer bounds and linked here dynamically */}
+                  <g opacity="0.65">
+                    {/* 💧 Water Leak Link (HTML Top Left -> Incident Teal Hub) */}
+                    <path d="M 60 70 Q 120 120, 305 260" stroke="#06B6D4" strokeWidth="1.5" strokeDasharray="3 5" className="animate-road-glow" fill="none" filter="url(#neon-glow)" />
+                    {/* 🚮 Garbage Overflow Link (HTML Bottom Left -> Island Base center) */}
+                    <path d="M 60 480 Q 150 440, 270 410" stroke="#8B5CF6" strokeWidth="1.5" strokeDasharray="3 5" className="animate-road-glow" style={{ animationDirection: "reverse" }} fill="none" filter="url(#neon-glow)" />
+                    {/* 💡 Street Light Link (HTML Mid Right -> Purple Satellite node) */}
+                    <path d="M 540 150 Q 420 160, 195 175" stroke="#EAB308" strokeWidth="1.5" strokeDasharray="4 4" className="animate-road-glow" fill="none" filter="url(#neon-glow)" />
+                    {/* 🚦 Traffic Link (HTML Bottom Right -> Central road junction) */}
+                    <path d="M 540 450 Q 430 400, 310 325" stroke="#F43F5E" strokeWidth="1.5" strokeDasharray="3 5" className="animate-road-glow" fill="none" filter="url(#neon-glow)" />
+                    {/* ⚡ Power Outage Link (HTML Bottom Center -> Emerald eco terminal) */}
+                    <path d="M 300 520 L 425 220" stroke="#10B981" strokeWidth="1.2" strokeDasharray="3 4" fill="none" />
+                    {/* 🌳 Fallen Tree Link (HTML Mid Left -> Green Grassland park) */}
+                    <path d="M 60 210 Q 180 230, 435 345" stroke="#059669" strokeWidth="1.5" strokeDasharray="4 4" fill="none" filter="url(#neon-glow)" />
                   </g>
                 </svg>
 
-                {/* Floating Dynamic AI Cards */}
-                {/* Float Card 1: Water leak */}
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md border border-slate-150 p-2.5 rounded-2xl flex items-center gap-2.5 shadow-xl hover:scale-105 transition-transform duration-300">
-                  <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 border border-blue-105 flex items-center justify-center">
-                    <Radio className="w-4 h-4 animate-pulse text-blue-500" />
+                {/* 10. PREMIUM INTERACTIVE GLASSMORPHIC CARDS ORBITING THEREOF */}
+                
+                {/* CARD 1: 💧 Water Leak (Top Left) */}
+                <div 
+                  style={{
+                    transform: `perspective(1000px) rotateX(${mousePos.y * 10}deg) rotateY(${-mousePos.x * 10}deg)`,
+                    transition: "transform 0.2s ease-out"
+                  }}
+                  className="absolute top-2 left-2 bg-white/75 backdrop-blur-xl border border-white/60 p-3 rounded-2xl flex items-center gap-3 shadow-xl hover:shadow-cyan-400/25 hover:scale-105 hover:bg-white/85 transition-all duration-300 animate-float-slow select-none cursor-pointer"
+                >
+                  <div className="w-9 h-9 rounded-xl bg-cyan-50 text-cyan-500 border border-cyan-150 flex items-center justify-center shadow-inner animate-pulse">
+                    <Radio className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <p className="text-[10px] text-slate-500 font-mono font-bold uppercase">💧 Water Leak</p>
-                    <p className="text-[11px] font-black text-slate-900">Priority High</p>
+                    <p className="text-[9px] text-slate-400 font-mono font-bold uppercase tracking-widest">💧 Water Leak</p>
+                    <p className="text-xs font-black text-slate-800 font-display">Priority High</p>
                   </div>
                 </div>
 
-                {/* Float Card 2: Garbage */}
-                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md border border-slate-150 p-2.5 rounded-2xl flex items-center gap-2.5 shadow-xl hover:scale-105 transition-transform duration-300">
-                  <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-655 border border-purple-100 flex items-center justify-center">
-                    <Users className="w-4 h-4 text-purple-600" />
+                {/* CARD 2: 🚮 Garbage Overflow (Bottom Left) */}
+                <div 
+                  style={{
+                    transform: `perspective(1000px) rotateX(${mousePos.y * 10}deg) rotateY(${-mousePos.x * 10}deg)`,
+                    transition: "transform 0.2s ease-out"
+                  }}
+                  className="absolute bottom-2 left-2 bg-white/75 backdrop-blur-xl border border-white/60 p-3 rounded-2xl flex items-center gap-3 shadow-xl hover:shadow-purple-400/25 hover:scale-105 hover:bg-white/85 transition-all duration-300 animate-float-medium select-none cursor-pointer"
+                >
+                  <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 border border-purple-150 flex items-center justify-center shadow-inner">
+                    <Users className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <p className="text-[10px] text-slate-500 font-mono font-bold uppercase">🚮 Garbage Overflow</p>
-                    <p className="text-[11px] font-black text-purple-700">Team Assigned</p>
+                    <p className="text-[9px] text-slate-400 font-mono font-bold uppercase tracking-widest">🚮 Waste Overflow</p>
+                    <p className="text-xs font-black text-purple-700 font-display">Team Assigned</p>
                   </div>
                 </div>
 
-                {/* Float Card 3: Street light */}
-                <div className="absolute top-1/3 right-4 bg-white/90 backdrop-blur-md border border-slate-150 p-2.5 rounded-2xl flex items-center gap-2.5 shadow-xl hover:scale-105 transition-transform duration-300">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-105 flex items-center justify-center">
-                    <Check className="w-4 h-4" />
+                {/* CARD 3: 💡 Street Light (Top Right) */}
+                <div 
+                  style={{
+                    transform: `perspective(1000px) rotateX(${mousePos.y * 10}deg) rotateY(${-mousePos.x * 10}deg)`,
+                    transition: "transform 0.2s ease-out"
+                  }}
+                  className="absolute top-2 right-2 bg-white/75 backdrop-blur-xl border border-white/60 p-3 rounded-2xl flex items-center gap-3 shadow-xl hover:shadow-yellow-400/25 hover:scale-105 hover:bg-white/85 transition-all duration-300 animate-float-fast select-none cursor-pointer"
+                >
+                  <div className="w-9 h-9 rounded-xl bg-yellow-50 text-amber-500 border border-yellow-150 flex items-center justify-center shadow-inner">
+                    <Check className="w-4.5 h-4.5 font-bold" />
                   </div>
                   <div className="text-left">
-                    <p className="text-[10px] text-slate-500 font-mono font-bold uppercase">💡 Street Light</p>
-                    <p className="text-[11px] font-black text-emerald-600">Resolved</p>
+                    <p className="text-[9px] text-slate-400 font-mono font-bold uppercase tracking-widest">💡 Street Light</p>
+                    <p className="text-xs font-black text-amber-600 font-display">Resolved</p>
                   </div>
                 </div>
 
-                {/* Float Card 4: Traffic Congestion */}
-                <div className="absolute bottom-16 right-4 bg-white/90 backdrop-blur-md border border-slate-150 p-2.5 rounded-[1.2rem] flex items-center gap-2.5 shadow-xl hover:scale-105 transition-transform duration-300">
-                  <div className="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 border border-rose-105 flex items-center justify-center">
-                    <Activity className="w-4 h-4 text-rose-500 animate-pulse" />
+                {/* CARD 4: 🚦 Traffic Congestion (Bottom Right) */}
+                <div 
+                  style={{
+                    transform: `perspective(1000px) rotateX(${mousePos.y * 10}deg) rotateY(${-mousePos.x * 10}deg)`,
+                    transition: "transform 0.2s ease-out"
+                  }}
+                  className="absolute bottom-12 right-2 bg-white/75 backdrop-blur-xl border border-white/60 p-3 rounded-2xl flex items-center gap-3 shadow-xl hover:shadow-rose-400/25 hover:scale-105 hover:bg-white/85 transition-all duration-300 animate-float-slow select-none cursor-pointer"
+                >
+                  <div className="w-9 h-9 rounded-xl bg-rose-50 text-rose-500 border border-rose-150 flex items-center justify-center shadow-inner animate-pulse">
+                    <Activity className="w-4.5 h-4.5" />
                   </div>
                   <div className="text-left">
-                    <p className="text-[10px] text-slate-500 font-mono font-bold uppercase">🚦 Traffic Congestion</p>
-                    <p className="text-[11px] font-black text-rose-600">Heavy Lock</p>
+                    <p className="text-[9px] text-slate-400 font-mono font-bold uppercase tracking-widest">🚦 Traffic Node</p>
+                    <p className="text-xs font-black text-rose-600 font-display">Heavy Congestion</p>
+                  </div>
+                </div>
+
+                {/* CARD 5: ⚡ Power Outage (Bottom Center) */}
+                <div 
+                  style={{
+                    transform: `perspective(1000px) rotateX(${mousePos.y * 10}deg) rotateY(${-mousePos.x * 10}deg)`,
+                    transition: "transform 0.2s ease-out"
+                  }}
+                  className="absolute bottom-2 left-1/3 -translate-x-1/12 bg-white/75 backdrop-blur-xl border border-white/60 p-2.5 rounded-2xl flex items-center gap-2.5 shadow-xl hover:shadow-emerald-400/25 hover:scale-105 hover:bg-white/85 transition-all duration-300 animate-float-medium select-none cursor-pointer"
+                >
+                  <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-550 border border-emerald-150 flex items-center justify-center">
+                    <Zap className="w-4 h-4 animate-bounce text-emerald-500" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-[9px] text-slate-400 font-mono font-bold uppercase tracking-wider">⚡ Grid Substation</p>
+                    <p className="text-[11px] font-black text-emerald-600">Active Repair</p>
+                  </div>
+                </div>
+
+                {/* CARD 6: 🌳 Fallen Tree (Mid Left) */}
+                <div 
+                  style={{
+                    transform: `perspective(1000px) rotateX(${mousePos.y * 10}deg) rotateY(${-mousePos.x * 10}deg)`,
+                    transition: "transform 0.2s ease-out"
+                  }}
+                  className="absolute top-1/3 left-2 bg-white/75 backdrop-blur-xl border border-white/60 p-2.5 rounded-2xl flex items-center gap-2.5 shadow-xl hover:shadow-green-400/25 hover:scale-105 hover:bg-white/85 transition-all duration-300 animate-float-fast select-none cursor-pointer"
+                >
+                  <div className="w-8 h-8 rounded-xl bg-green-50 text-emerald-500 border border-green-150 flex items-center justify-center">
+                    <AlertCircle className="w-4 h-4 text-emerald-500" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-[9px] text-slate-400 font-mono font-bold uppercase tracking-wider">🌳 Fallen Tree</p>
+                    <p className="text-[11px] font-black text-emerald-700">En Route</p>
                   </div>
                 </div>
 
               </div>
-
             </div>
           </div>
-
         </div>
       </section>
 
