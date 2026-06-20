@@ -82,7 +82,7 @@ CityGPT transforms how citizens interact with municipal authorities. Instead of 
 - In-memory session store (persists across the session)
 
 **AI**
-- [Google Gemini](https://aistudio.google.com) via `@google/genai` v2
+- [Google Gemini] via `@google/genai` v2
 - Model: `gemini-3.5-flash`
 - Structured JSON output with schema enforcement
 - Gemini Vision for image-based complaint classification
@@ -116,7 +116,7 @@ City_gpt/
 ### Prerequisites
 
 - **Node.js** `>= 18`
-- A **Google Gemini API Key** — [Get one free at Google AI Studio](https://aistudio.google.com/app/apikey)
+- A **Google Gemini API Key** 
 
 ### Installation
 
